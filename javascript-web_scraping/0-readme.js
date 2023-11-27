@@ -1,17 +1,12 @@
 #!/usr/bin/node
 
 const fs = require('fs');
+const file = process.argv[2];
 
-const filePath = process.argv[2];
-
-const read = fs.createReadStream(filePath, 'utf-8');
-
-// Imprimir algun error generado
-read.on('error', (error) => {
-  console.error(error);
-});
-
-// Imprimir la data si no hay error
-read.on('data', (data) => {
-  console.log(data);
+fs.readFile(file, 'utf-8', (err, data) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log(data);
+  }
 });
