@@ -1,17 +1,14 @@
 #!/usr/bin/node
+// Argumento: archivo para escribir
+const path = process.argv[2];
+// Argumento: cadena para pasar al archivo
+const str = process.argv[3];
 
 const fs = require('fs');
+const util = require('util');
 
-const filePath = process.argv[2];
-
-const txt = process.argv[3];
-
-const escribir = fs.createWriteStream(filePath, 'utf-8');
-
-// Imprimir algun error generado
-escribir.on('error', (error) => {
-  console.error(error);
+fs.writeFile(path, str, 'utf8', (err) => {
+  if (err) {
+    console.log(util.inspect(err, false, null, true));
+  }
 });
-
-// Escribir el texto en el archivo
-escribir.write(txt);
